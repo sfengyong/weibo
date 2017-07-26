@@ -4,7 +4,7 @@
             <img class="header-avatar" :src="userInfo.avatar_large" alt="">
             <span class="header-name">{{userInfo.name}}</span>
             <div class="header-refresh" @click="refresh">
-               <span class="iconfont">&#xe608;</span>
+               <span class="iconfont refresh">&#xe608;</span>
            </div>
         </div>
         <nav class="switch-tab">
@@ -45,7 +45,7 @@
         methods:{
             ...mapActions([
                 'getUserInfo',
-                'getHomeTimeline'
+                'getHomeTimeLine'
             ]),
             refresh(){
                 switch (this.currentPage){
@@ -98,12 +98,11 @@
             .header-refresh{
                 display: inline-block;
                 float:right;
-                .el-icon-loading {
-                    animation: rotating 1s linear infinite;
-                    font-size: 2.4rem;
-                    vertical-align: middle;
-                    margin-top: 1.7rem;
-                    margin-right: 1.8rem;
+                margin-top: 1rem;
+                margin-right: 1rem;
+                .refresh{
+                    font-size: 2rem;
+                    color: rgba(0,0,0,0.7);
                 }
             }
         }

@@ -22,7 +22,7 @@
 				<span class="re-content-text" v-html="formatContent('@' + x.retweeted_status.user.name + ':'+ x.retweeted_status.text)"></span>
 				<div class="content-img" v-if="x.retweeted_status.pic_urls.length !=0">
 					<ul class="clear-fix">
-						<li v-for="y in x.retweeted_status.pic_urls" class="img-li-default" :class="imgClass(x.retweeted_status.pic_urls.length)" >
+						<li v-for="y in x.retweeted_status.pic_urls" class="img-li-default" :class="imgClass(x.retweeted_status.pic_urls.length)" @click="imageZoom(y.thumbnail_pic)">
 							<div :style="{backgroundImage:'url(' + formatThumbImg(y.thumbnail_pic) + ')'}"></div>
 						</li>
 					</ul>
