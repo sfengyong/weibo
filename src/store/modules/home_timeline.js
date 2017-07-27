@@ -11,14 +11,14 @@ const state = {
     statuses:[],
     option:{
         refresh:false,
-        page:1
+        page:0
     }
 }
 
 const mutations = {
     [HOME_REFRESH](state,refresh){
         if(refresh){
-            state.option.page = 1 ;
+            state.option.page = 0 ;
         }
         state.option.refresh = refresh;
     },

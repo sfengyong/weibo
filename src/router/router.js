@@ -53,7 +53,6 @@ const router = new Router({
 let routerList = []
 
 router.beforeEach((to,from,next) => {
-
 	let position = scrollUtils.getScrollTop();
 	let currentRouterIndex = routerList.findIndex( e =>{
 		return e.path === from.fullPath;

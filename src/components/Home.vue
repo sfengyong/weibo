@@ -3,6 +3,10 @@
 		<div class="list" v-for = "x in list">
 			<fy-content :x = "x"></fy-content>
 		</div>
+		<div class="loading" v-if="this.option.refresh">
+			<i class="el-icon-loading"></i>
+			<span>加载中</span>
+		</div>
 	</div>
 
 </template>
@@ -27,7 +31,7 @@
 		watch:{
 		    option:{
 		      handler:function(newval,olaval){
-		          if(newval && newval.page == 1 ){
+		          if(newval && newval.page == 0 ){
 		              this.list = [];
 				  }
 			  },
@@ -50,7 +54,6 @@
 			homeTimeline(page){
 			    this.getHomeTimeLine(page);
 			},
-
 		}
 	}
 </script>
@@ -66,6 +69,14 @@
 		box-sizing: border-box;
 		padding-left: 1.3rem;
 		padding-right: 0.4rem;
+	}
+	.loading{
+		width: 100%;
+		height: 1rem;
+		text-align: center;
+		font-size: 1.5rem;
+		margin-top: 1rem;
+		padding-bottom: 0rem;
 	}
 }
 </style>

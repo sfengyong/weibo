@@ -14,7 +14,7 @@
             --><el-col :span="8" :class = "currentPage == 'notify'? 'active' : '' " >消息</el-col>
            </el-row>
                </nav>
-        <div class="content">
+        <div class="content" @scroll = 'scrollWrap()'>
             <transition name="fade">
                 <keep-alive>
                     <router-view></router-view>
@@ -25,6 +25,7 @@
 </template>
 <script>
     import { mapActions,mapGetters } from  'vuex'
+    import * as scrollUtils from "../utils/scroll-position"
     export default{
         name:'main',
         data(){
@@ -39,7 +40,9 @@
         computed:{
             ...mapGetters({
                 token:'token',
-                userInfo:'userInfo'
+                userInfo:'userInfo',
+                option:'home_timeline_option'
+
             })
         },
         methods:{
@@ -57,6 +60,25 @@
             showHomePage(){
                 this.$router.push({ name : 'home' });
                 this.currentName = 'home';
+            },
+            loadMore(){
+                var content = document.getElementsByClassName('content')[0];
+                if(content.clientHeight + content.scrollTop == content.scrollHeight){
+                    this.option.refresh = true;
+                    var page = this.option.page+1;
+                    this.getHomeTimeLine(page);
+                }
+            },
+            //函数节流
+            throttle(method,context){
+                clearTimeout(method.tId);
+                method.tId = setTimeout(function(){
+                    method.call(context);
+                },90)
+            },
+            scrollWrap(){
+                var vue = this;
+                vue.throttle(vue.loadMore,vue)
             }/*,
             showExplorePage(){
                 this.$router.push({ name: 'explore' });
@@ -74,6 +96,7 @@
         height: 100%;
         background:#F5F5F5;
         padding:0.7rem;
+        box-sizing: border-box;
         .user-header{
             height:8.8%;
             background:white;
@@ -132,7 +155,7 @@
         .content::-webkit-scrollbar {display:none}
         .content{
             width: 100%;
-            height: calc(100% - 7.5% - 1rem);
+            height: calc(100% - 7.5% - 5.4rem);
             overflow-y:scroll;
             overflow-x:hidden;
         }

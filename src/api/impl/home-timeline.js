@@ -11,7 +11,7 @@ import store from "../../store"
     const accesstoken = store.getters.token.access_token;
     var request_data = {
         access_token:accesstoken,
-        count:30,
+        count:20,
         page:page
     }
     var config = {
